@@ -1,5 +1,5 @@
 const myHeaders = new Headers()
-myHeaders.append('apikey', 'OyyFiY7rcXTifGR6lQ0jLEaGz4BMqey2')
+myHeaders.append('apikey', process.env.REACT_APP_API_KEY)
 
 export const requestOptions = {
     method: 'GET',
