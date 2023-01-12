@@ -1,19 +1,9 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-    setChosenCurrency,
-    setCurrencies,
-    setCurrentCurrency,
-} from '../redux/slices/currenciesSlice'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { requestOptions } from '../utils/requestParams'
 
-const CurrenciesList = () => {
-    const dispatch = useDispatch()
-    const currensies = useSelector((state) => state.currency.currencies.currencies)
-
-    useEffect(() => {
-        dispatch(setCurrencies(JSON.parse(localStorage.getItem('currencies'))))
-    }, [])
+const CurrenciesList = ({ setCurrency }) => {
+    const currensies = useSelector((state) => state.currency?.currencies)
 
     let currensiesArray = []
     if (currensies) {
@@ -21,10 +11,9 @@ const CurrenciesList = () => {
     }
 
     const chooseCurrency = (currency) => {
-        dispatch(setCurrentCurrency(currency))
         // fetch(`https://api.apilayer.com/currency_data/live?source=${currency}`, requestOptions)
         //     .then((response) => response.json())
-        //     .then((result) => dispatch(setChosenCurrency(result)))
+        //     .then((result) => setCurrency(result))
         //     .catch((error) => console.log('error', error))
     }
 
