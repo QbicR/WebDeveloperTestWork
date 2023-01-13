@@ -8,11 +8,15 @@ import { statuses } from '../../utils/consts'
 
 const Ticker = ({ currency }) => {
     const [value, setValue] = useState(null)
-    const [instrument, setInstrument] = useState(null)
+    const [instrument, setInstrument] = useState('')
     const [amount, setAmount] = useState('')
     const dispatch = useDispatch()
     const moment = require('moment')
     moment.locale('ru')
+
+    const isButtonActive = amount !== '' && instrument !== ''
+
+    console.log(isButtonActive)
 
     const buyValue = (value * 1.01).toFixed(4)
     const sellValue = (value * 0.99).toFixed(4)
@@ -74,7 +78,7 @@ const Ticker = ({ currency }) => {
                     <div className="d-block">
                         {value ? <p>{buyValue}</p> : <p>Цена</p>}
                         <button
-                            disabled={!amount}
+                            disabled={!isButtonActive}
                             onClick={(e) => addItemInState(e)}
                             type="button"
                             className="btn btn-success mr-5"
@@ -85,7 +89,7 @@ const Ticker = ({ currency }) => {
                     <div className="d-block">
                         {value ? <p>{sellValue}</p> : <p>Цена</p>}
                         <button
-                            disabled={!amount}
+                            disabled={!isButtonActive}
                             onClick={(e) => addItemInState(e)}
                             type="button"
                             className="btn btn-danger mr-5"
