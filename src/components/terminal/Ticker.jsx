@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setApplicationList } from '../redux/slices/currenciesSlice'
-import { getRandomStatus } from '../utils/getRandomStatus'
 import 'moment/locale/ru'
 
-const statuses = ['Active', 'Filled', 'Rejected', 'Cancelled']
+import { setApplicationList } from '../../redux/slices/currenciesSlice'
+import { getRandomStatus } from '../../utils/getRandomStatus'
+import { statuses } from '../../utils/consts'
 
 const Ticker = ({ currency }) => {
     const [value, setValue] = useState(null)
@@ -21,6 +21,8 @@ const Ticker = ({ currency }) => {
     if (currency?.quotes) {
         chosenCurrensiesArray = Object.entries(currency.quotes)
     }
+
+    console.log(amount)
 
     const addItemInState = (e) => {
         const side = e.target.innerText
@@ -54,6 +56,9 @@ const Ticker = ({ currency }) => {
                     className="form-select"
                     aria-label="Default select example"
                 >
+                    <option value={currency} defaultValue>
+                        Выберите валюту
+                    </option>
                     {chosenCurrensiesArray.map((currency) => (
                         <option key={currency[0]} value={currency}>
                             {currency[0].slice(0, 3)} / {currency[0].slice(-3)}
@@ -61,14 +66,14 @@ const Ticker = ({ currency }) => {
                     ))}
                 </select>
                 <input
-                    className="form-control mb-4"
+                    className="form-control mb-2"
                     type="text"
                     placeholder="Количество"
                     onChange={(e) => setAmount(e.target.value)}
                     value={amount}
                     aria-label="default input example"
                 />
-                <div className="d-flex justify-content-around mb-4">
+                <div className="d-flex justify-content-around mb-2">
                     <div className="d-block">
                         {value ? <p>{buyValue}</p> : <p>Цена</p>}
                         <button

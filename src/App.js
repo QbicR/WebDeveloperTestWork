@@ -1,5 +1,6 @@
-import { Route, Routes } from 'react-router-dom'
-import Header from './components/Header'
+import { Navigate, Route, Routes } from 'react-router-dom'
+
+import Header from './components/navbar/Header'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
 import './styles/index.css'
@@ -12,7 +13,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/auth" element={<Auth />} />
-                    <Route path="*" element={<Main />} />
+                    <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </div>
         </div>

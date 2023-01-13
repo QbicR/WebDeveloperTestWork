@@ -1,42 +1,41 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import ApplicationsList from '../components/ApplicationsList'
-import MainTicket from '../components/MainTicket'
+import Table from '../components/table/Table'
+import TradingTerminal from '../components/terminal/TradingTerminal'
 import { setCurrencies } from '../redux/slices/currenciesSlice'
 import { requestOptions } from '../utils/requestParams'
 
-// const ws = new WebSocket('wss://api.apilayer.com/currency_data/list')
 const Main = () => {
     const dispatch = useDispatch()
+    const [arr, setArr] = useState([])
+    const auth = localStorage.getItem('auth')
 
     useEffect(() => {
-        // fetch('https://api.apilayer.com/currency_data/list', requestOptions)
-        //     .then((response) => response.json())
-        //     .then((result) => dispatch(setCurrencies(result)))
-        //     .catch((error) => console.log('error', error))
+        fetch('https://api.apilayer.com/currency_data/list', requestOptions)
+            .then((response) => response.json())
+            .then((result) => dispatch(setCurrencies(result)))
+            .catch((error) => console.log('error', error))
     }, [])
+
+    const handleAddTerminal = () => {
+        setArr([...arr, 1])
+    }
 
     return (
         <>
             <div className="d-flex">
-                <div className="card w-25">
-                    <span>Обменять валюту</span>
-                    <MainTicket />
-                </div>
-                <div className="card w-25">
-                    <span>Обменять валюту</span>
-                    <MainTicket />
-                </div>
-                <div className="card w-25">
-                    <span>Обменять валюту</span>
-                    <MainTicket />
-                </div>
-                <div className="card w-25">
-                    <span>Обменять валюту</span>
-                    <MainTicket />
-                </div>
+                {auth && arr.length < 4 && (
+                    <button className="btn btn-outline-primary" onClick={handleAddTerminal}>
+                        Add terminal
+                    </button>
+                )}
+                {arr.map((_, index) => (
+                    <div className="card w-25" key={index}>
+                        <TradingTerminal />
+                    </div>
+                ))}
             </div>
-            <ApplicationsList />
+            <Table />
         </>
     )
 }

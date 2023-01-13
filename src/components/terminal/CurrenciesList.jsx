@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { requestOptions } from '../utils/requestParams'
+import { requestOptions } from '../../utils/requestParams'
 
 const CurrenciesList = ({ setCurrency }) => {
     const currensies = useSelector((state) => state.currency?.currencies)
@@ -11,16 +11,16 @@ const CurrenciesList = ({ setCurrency }) => {
     }
 
     const chooseCurrency = (currency) => {
-        // fetch(`https://api.apilayer.com/currency_data/live?source=${currency}`, requestOptions)
-        //     .then((response) => response.json())
-        //     .then((result) => setCurrency(result))
-        //     .catch((error) => console.log('error', error))
+        fetch(`https://api.apilayer.com/currency_data/live?source=${currency}`, requestOptions)
+            .then((response) => response.json())
+            .then((result) => setCurrency(result))
+            .catch((error) => console.log('error', error))
     }
 
     return (
         <div>
             <span>Выберите валюту</span>
-            <select className="form-select" size="7" aria-label="size 3 select example">
+            <select className="form-select" size="6" aria-label="size 3 select example">
                 {currensiesArray.map((currency) => (
                     <option
                         onClick={() => chooseCurrency(currency[0])}
