@@ -22,8 +22,6 @@ const Ticker = ({ currency }) => {
         chosenCurrensiesArray = Object.entries(currency.quotes)
     }
 
-    console.log(amount)
-
     const addItemInState = (e) => {
         const side = e.target.innerText
         const newItem = {
@@ -36,7 +34,6 @@ const Ticker = ({ currency }) => {
             amount,
             instrument,
         }
-        console.log(newItem)
         setAmount('')
         dispatch(setApplicationList(newItem))
     }
