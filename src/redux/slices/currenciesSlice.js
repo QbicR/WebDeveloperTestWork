@@ -95,7 +95,7 @@ const mockData = [
 
 const initialState = {
     currencies: {},
-    applicationList: mockData,
+    applicationList: [],
 }
 
 const currencySlice = createSlice({
