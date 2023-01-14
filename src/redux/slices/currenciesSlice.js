@@ -75,7 +75,7 @@ const mockData = [
         id: 1673564733588,
         creationTime: '13-го января 2023, 2:05:33:533',
         changeTime: '13-го января 2023, 2:05:33:533',
-        status: 'Filled',
+        status: 'Cancel',
         side: 'Buy',
         price: '3.7235',
         amount: '150',
@@ -85,7 +85,7 @@ const mockData = [
         id: 1673564733589,
         creationTime: '13-го января 2023, 2:05:33:533',
         changeTime: '13-го января 2023, 2:05:33:533',
-        status: 'Filled',
+        status: 'Active',
         side: 'Buy',
         price: '3.7235',
         amount: '150',
@@ -95,7 +95,7 @@ const mockData = [
 
 const initialState = {
     currencies: {},
-    applicationList: [],
+    applicationList: mockData,
 }
 
 const currencySlice = createSlice({

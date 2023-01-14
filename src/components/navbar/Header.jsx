@@ -16,22 +16,14 @@ const Header = () => {
             <nav className="navbar bg-light">
                 <div className="container-fluid">
                     <span className="navbar-brand">Test App</span>
-                    {auth ? (
-                        <button className="btn btn-outline-danger" type="submit" onClick={logOut}>
-                            Выйти
-                        </button>
-                    ) : (
-                        !auth && (
-                            <button
-                                className="btn btn-outline-success"
-                                type="submit"
-                                onClick={logOut}
-                                hidden={pathname === '/auth'}
-                            >
-                                Войти
-                            </button>
-                        )
-                    )}
+                    <button
+                        className={auth ? 'btn btn-outline-danger' : 'btn btn-outline-success'}
+                        type="submit"
+                        hidden={pathname === '/auth'}
+                        onClick={logOut}
+                    >
+                        {auth ? 'Выйти' : 'Войти'}
+                    </button>
                 </div>
             </nav>
         </>

@@ -14,9 +14,9 @@ const Table = () => {
     const limit = 7
     const applicationList = useSelector((state) => state.currency.applicationList)
 
-    const cropData = paginate(applicationList, currentPage, limit)
+    const sortedData = _.orderBy(applicationList, [sortBy.path], [sortBy.order])
 
-    const sortedData = _.orderBy(cropData, [sortBy.path], [sortBy.order])
+    const cropData = paginate(sortedData, currentPage, limit)
 
     const handleSort = (item) => {
         if (sortBy.path === item) {
@@ -33,7 +33,7 @@ const Table = () => {
         <div>
             <table className="table container-md">
                 <TableHeader colomns={colomns} handleSort={handleSort} />
-                <TableBody sortedData={sortedData} />
+                <TableBody sortedData={cropData} />
             </table>
             <Pagination
                 currentPage={currentPage}

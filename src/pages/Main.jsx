@@ -11,10 +11,10 @@ const Main = () => {
     const auth = localStorage.getItem('auth')
 
     useEffect(() => {
-        fetch('https://api.apilayer.com/currency_data/list', requestOptions)
-            .then((response) => response.json())
-            .then((result) => dispatch(setCurrencies(result)))
-            .catch((error) => console.log('error', error))
+        // fetch('https://api.apilayer.com/currency_data/list', requestOptions)
+        //     .then((response) => response.json())
+        //     .then((result) => dispatch(setCurrencies(result)))
+        //     .catch((error) => console.log('error', error))
     }, [])
 
     const handleAddTerminal = () => {

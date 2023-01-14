@@ -11,10 +11,10 @@ const CurrenciesList = ({ setCurrency }) => {
     }
 
     const chooseCurrency = (currency) => {
-        fetch(`https://api.apilayer.com/currency_data/live?source=${currency}`, requestOptions)
-            .then((response) => response.json())
-            .then((result) => setCurrency(result))
-            .catch((error) => console.log('error', error))
+        // fetch(`https://api.apilayer.com/currency_data/live?source=${currency}`, requestOptions)
+        //     .then((response) => response.json())
+        //     .then((result) => setCurrency(result))
+        //     .catch((error) => console.log('error', error))
     }
 
     return (

@@ -16,8 +16,6 @@ const Ticker = ({ currency }) => {
 
     const isButtonActive = amount !== '' && instrument !== ''
 
-    console.log(isButtonActive)
-
     const buyValue = (value * 1.01).toFixed(4)
     const sellValue = (value * 0.99).toFixed(4)
 
