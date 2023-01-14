@@ -11,10 +11,10 @@ const Main = () => {
     const auth = localStorage.getItem('auth')
 
     useEffect(() => {
-        fetch('https://api.apilayer.com/currency_data/list', requestOptions)
-            .then((response) => response.json())
-            .then((result) => dispatch(setCurrencies(result)))
-            .catch((error) => console.log('error', error))
+        // fetch('https://api.apilayer.com/currency_data/list', requestOptions)
+        //     .then((response) => response.json())
+        //     .then((result) => dispatch(setCurrencies(result)))
+        //     .catch((error) => console.log('error', error))
     }, [])
 
     const handleAddTerminal = () => {
@@ -23,19 +23,27 @@ const Main = () => {
 
     return (
         <>
+            {auth && arr.length < 4 && (
+                <button className="btn btn-outline-primary" onClick={handleAddTerminal}>
+                    Add terminal
+                </button>
+            )}
             <div className="d-flex">
-                {auth && arr.length < 4 && (
-                    <button className="btn btn-outline-primary" onClick={handleAddTerminal}>
-                        Add terminal
-                    </button>
-                )}
                 {arr.map((_, index) => (
-                    <div className="card w-25" key={index}>
+                    <div className="card w-25 p-1" key={index}>
                         <TradingTerminal />
                     </div>
                 ))}
             </div>
-            <Table />
+            {auth ? (
+                <Table />
+            ) : (
+                <div className="container row mt-5">
+                    <h3 className="col-md-6 offset-md-3 shadow p-4 rounded-3">
+                        Авторизуйтесь, чтобы пользоваться приложением
+                    </h3>
+                </div>
+            )}
         </>
     )
 }

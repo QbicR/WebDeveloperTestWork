@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Header = () => {
     const navigate = useNavigate()
@@ -15,7 +15,9 @@ const Header = () => {
         <>
             <nav className="navbar bg-light">
                 <div className="container-fluid">
-                    <span className="navbar-brand">Test App</span>
+                    <Link to="/" className="navbar-brand">
+                        Test App
+                    </Link>
                     <button
                         className={auth ? 'btn btn-outline-danger' : 'btn btn-outline-success'}
                         type="submit"
