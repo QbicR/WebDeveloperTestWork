@@ -14,7 +14,7 @@ const Ticker = ({ currency }) => {
     const moment = require('moment')
     moment.locale('ru')
 
-    const isButtonActive = amount !== '' && instrument !== ''
+    const isButtonActive = amount !== '' && instrument !== '' && amount > 0
 
     const buyValue = (value * 1.01).toFixed(4)
     const sellValue = (value * 0.99).toFixed(4)

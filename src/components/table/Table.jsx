@@ -10,7 +10,7 @@ import { colomns } from '../../utils/consts'
 
 const Table = () => {
     const [currentPage, setCurrentPage] = useState(1)
-    const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
+    const [sortBy, setSortBy] = useState({ path: 'id', order: 'asc' })
     const limit = 7
     const applicationList = useSelector((state) => state.currency.applicationList)
 
