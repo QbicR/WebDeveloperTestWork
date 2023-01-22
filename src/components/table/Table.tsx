@@ -6,19 +6,24 @@ import TableHeader from './TableHeader'
 import TableBody from './TableBody'
 import { paginate } from '../../utils/paginate'
 import Pagination from '../ui/Pagination'
-import { colomns } from '../../utils/consts'
+import { ApplicationListType, SortByType } from '../../types/types'
 
-const Table = () => {
+const Table: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1)
-    const [sortBy, setSortBy] = useState({ path: 'id', order: 'asc' })
-    const limit = 7
-    const applicationList = useSelector((state) => state.currency.applicationList)
+    const [sortBy, setSortBy] = useState<{
+        path: string
+        order: SortByType
+    }>({ path: 'id', order: 'asc' })
+    const limit: number = 7
+    const applicationList: ApplicationListType[] = useSelector(
+        (state: any) => state.currency.applicationList,
+    )
 
     const sortedData = _.orderBy(applicationList, [sortBy.path], [sortBy.order])
 
     const cropData = paginate(sortedData, currentPage, limit)
 
-    const handleSort = (item) => {
+    const handleSort = (item: string) => {
         if (sortBy.path === item) {
             setSortBy({
                 ...sortBy,
@@ -32,8 +37,8 @@ const Table = () => {
     return (
         <div>
             <table className="table container-md">
-                <TableHeader colomns={colomns} handleSort={handleSort} />
-                <TableBody sortedData={cropData} />
+                <TableHeader handleSort={handleSort} />
+                <TableBody cropData={cropData} />
             </table>
             <Pagination
                 currentPage={currentPage}

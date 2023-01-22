@@ -6,7 +6,7 @@ import Auth from './pages/Auth'
 import Main from './pages/Main'
 import './styles/index.css'
 
-function App() {
+const App: React.FC = () => {
     return (
         <div className="app ">
             <Header />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-const Header = () => {
+const Header: React.FC = () => {
     const navigate = useNavigate()
     const auth = localStorage.getItem('auth')
     const { pathname } = useLocation()
@@ -19,7 +19,7 @@ const Header = () => {
                         Test App
                     </Link>
                     <button
-                        className={auth ? 'btn btn-outline-danger' : 'btn btn-outline-success'}
+                        className={auth ? 'btn btn-outline-danger' : 'btn btn-success'}
                         type="submit"
                         hidden={pathname === '/auth'}
                         onClick={logOut}

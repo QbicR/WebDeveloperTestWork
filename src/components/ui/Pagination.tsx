@@ -1,8 +1,15 @@
 import React from 'react'
 
-const Pagination = ({ currentPage, setCurrentPage, limit, totalCount }) => {
+interface IPagination {
+    currentPage: number
+    setCurrentPage: (page: number) => void
+    limit: number
+    totalCount: number
+}
+
+const Pagination: React.FC<IPagination> = ({ currentPage, setCurrentPage, limit, totalCount }) => {
     const pageCount = Math.ceil(totalCount / limit)
-    const pages = []
+    const pages: number[] = []
 
     for (let i = 0; i < pageCount; i++) {
         pages.push(i + 1)

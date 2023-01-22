@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+
 import Table from '../components/table/Table'
 import TradingTerminal from '../components/terminal/TradingTerminal'
-import { setCurrencies } from '../redux/slices/currenciesSlice'
-import { requestOptions } from '../utils/requestParams'
+import { fetchCurrensies } from '../redux/slices/asyncAction'
+import { useAppDispatch } from '../redux/store'
 
-const Main = () => {
-    const dispatch = useDispatch()
-    const [arr, setArr] = useState([])
+export type CurrenciesType = Record<string, string>
+
+const Main: React.FC = () => {
+    const dispatch = useAppDispatch()
+    const [arr, setArr] = useState<number[]>([])
     const auth = localStorage.getItem('auth')
 
-    useEffect(() => {
-        fetch('https://api.apilayer.com/currency_data/list', requestOptions)
-            .then((response) => response.json())
-            .then((result) => dispatch(setCurrencies(result)))
-            .catch((error) => console.log('error', error))
-    }, [])
-
     const handleAddTerminal = () => {
+        dispatch(fetchCurrensies())
         setArr([...arr, 1])
     }
 

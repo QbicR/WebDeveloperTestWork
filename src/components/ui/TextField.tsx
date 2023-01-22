@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
 
-const TextField = ({ label, type, name, value, onChange, error }) => {
+import { FuncArgs } from '../../types/types'
+
+interface ITextField {
+    label: string
+    name: string
+    value: string
+    onChange: (arg: FuncArgs) => void
+    error: string
+    type?: string
+}
+
+const TextField: React.FC<ITextField> = ({ label, type, name, value, onChange, error }) => {
     const [showPassword, setShowPassword] = useState(false)
 
-    const handleChange = ({ target }) => {
-        onChange({ name: [target.name], value: target.value })
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        onChange({ name: event.target.name, value: event.target.value })
     }
 
     const getInputClasses = () => {

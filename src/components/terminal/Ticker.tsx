@@ -5,27 +5,33 @@ import 'moment/locale/ru'
 import { setApplicationList } from '../../redux/slices/currenciesSlice'
 import { getRandomStatus } from '../../utils/getRandomStatus'
 import { statuses } from '../../utils/consts'
+import { CurrencyItem, CurrencyType } from '../../types/types'
 
-const Ticker = ({ currency }) => {
-    const [value, setValue] = useState(null)
+interface ITicker {
+    currency: CurrencyType
+}
+
+const Ticker: React.FC<ITicker> = ({ currency }) => {
+    const [value, setValue] = useState(0)
     const [instrument, setInstrument] = useState('')
-    const [amount, setAmount] = useState('')
+    const [amount, setAmount] = useState(0)
     const dispatch = useDispatch()
     const moment = require('moment')
     moment.locale('ru')
 
-    const isButtonActive = amount !== '' && instrument !== '' && amount > 0
+    const isButtonActive = instrument !== '' && amount > 0
 
-    const buyValue = (value * 1.01).toFixed(4)
-    const sellValue = (value * 0.99).toFixed(4)
+    const buyValue = Number((value * 1.01).toFixed(4))
+    const sellValue = Number((value * 0.99).toFixed(4))
 
-    let chosenCurrensiesArray = []
-    if (currency?.quotes) {
-        chosenCurrensiesArray = Object.entries(currency.quotes)
+    let chosenCurrensiesArray: CurrencyItem[] = []
+    if (currency) {
+        chosenCurrensiesArray = Object.entries(currency)
     }
 
-    const addItemInState = (e) => {
-        const side = e.target.innerText
+    const addItemInState = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const button = e.target as HTMLElement
+        const side = button.innerText
         const newItem = {
             id: Date.now(),
             creationTime: moment().format('Do MMMM YYYY, h:mm:ss:ms'),
@@ -36,15 +42,16 @@ const Ticker = ({ currency }) => {
             amount,
             instrument,
         }
-        setAmount('')
+        setAmount(0)
         dispatch(setApplicationList(newItem))
     }
 
-    const onChangeSelect = (event) => {
+    const onChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const eventArray = event.target.value.split(',')
         const instrument = eventArray[0].slice(0, 3) + '/' + eventArray[0].slice(-3)
         setInstrument(instrument)
-        setValue(eventArray[1])
+
+        setValue(Number(eventArray[1]))
     }
 
     return (
@@ -55,10 +62,10 @@ const Ticker = ({ currency }) => {
                     className="form-select"
                     aria-label="Default select example"
                 >
-                    <option value={currency} defaultValue>
+                    <option value={currency.timestamp} defaultValue={'Выберите валюту'}>
                         Выберите валюту
                     </option>
-                    {chosenCurrensiesArray.map((currency) => (
+                    {chosenCurrensiesArray.map((currency: any) => (
                         <option key={currency[0]} value={currency}>
                             {currency[0].slice(0, 3)} / {currency[0].slice(-3)}
                         </option>
@@ -68,7 +75,7 @@ const Ticker = ({ currency }) => {
                     className="form-control mb-2"
                     type="text"
                     placeholder="Количество"
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => setAmount(Number(e.target.value))}
                     value={amount}
                     aria-label="default input example"
                 />

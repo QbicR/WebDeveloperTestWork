@@ -3,14 +3,23 @@ import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import TextField from '../components/ui/TextField'
+import { FuncArgs } from '../types/types'
 import { validate } from '../utils/validate'
 
-const Auth = () => {
+export type LoginValidateType = {
+    login: string
+    password: string
+}
+
+const Auth: React.FC = () => {
     const [data, setData] = useState({
         login: '',
         password: '',
     })
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({
+        login: '',
+        password: '',
+    })
     const navigate = useNavigate()
 
     const validateScheme = yup.object().shape({
@@ -18,7 +27,7 @@ const Auth = () => {
         login: yup.string().matches(/(?=.{4,})/, 'Минимальная длина 4 символа'),
     })
 
-    const loginValidate = {
+    const loginValidate: LoginValidateType = {
         login: data.login,
         password: data.password,
     }
@@ -29,7 +38,7 @@ const Auth = () => {
 
     const isValid = Object.keys(errors).length === 0
 
-    const handleChange = (target) => {
+    const handleChange = (target: FuncArgs) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value,
