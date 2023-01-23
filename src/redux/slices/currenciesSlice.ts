@@ -25,9 +25,6 @@ const currencySlice = createSlice({
     name: 'currency',
     initialState,
     reducers: {
-        setCurrencies: (state, action) => {
-            state.currencies = action.payload.currencies
-        },
         setApplicationList: (state, action) => {
             state.applicationList.unshift(action.payload)
         },
@@ -55,6 +52,6 @@ const currencySlice = createSlice({
     },
 })
 
-export const { setCurrencies, setApplicationList, deleteApplicationItem } = currencySlice.actions
+export const { setApplicationList, deleteApplicationItem } = currencySlice.actions
 
 export default currencySlice.reducer
