@@ -1,6 +1,8 @@
-export const statuses = ['Active', 'Filled', 'Rejected', 'Cancelled']
+import { ApplicationListType, ColomnsType } from '../types/types'
 
-export const colomns = {
+export const statuses: string[] = ['Active', 'Filled', 'Rejected', 'Cancelled']
+
+export const colomns: ColomnsType = {
     id: {
         path: 'id',
         name: 'ID',
@@ -38,7 +40,7 @@ export const colomns = {
     },
 }
 
-export const mockData = [
+export const mockData: ApplicationListType[] = [
     {
         id: 1673564733581,
         creationTime: '13-го января 2023, 2:05:33:733',
