@@ -1,5 +1,5 @@
 const myHeaders = new Headers()
-myHeaders.append('apikey', 'ZztmhWrYtGMOOOez067UMoHtc2SjiqS3')
+myHeaders.append('apikey', 'OyyFiY7rcXTifGR6lQ0jLEaGz4BMqey2')
 
 type RequestOptionsType = {
     method: string

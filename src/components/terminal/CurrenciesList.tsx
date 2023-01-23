@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
 import { CurrensiesItemType } from '../../types/types'
 
@@ -8,7 +9,7 @@ interface ICurrenciesList {
 }
 
 const CurrenciesList: React.FC<ICurrenciesList> = ({ chooseCurrency }) => {
-    const currensies = useSelector((state: any) => state.currency.currencies)
+    const currensies = useSelector((state: RootState) => state.currency.currencies)
 
     let currensiesArray: CurrensiesItemType[] = []
     if (currensies) {

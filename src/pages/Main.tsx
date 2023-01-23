@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Table from '../components/table/Table'
 import TradingTerminal from '../components/terminal/TradingTerminal'
@@ -13,9 +13,12 @@ const Main: React.FC = () => {
     const auth = localStorage.getItem('auth')
 
     const handleAddTerminal = () => {
-        dispatch(fetchCurrensies())
         setArr([...arr, 1])
     }
+
+    useEffect(() => {
+        dispatch(fetchCurrensies())
+    }, [auth])
 
     return (
         <>
